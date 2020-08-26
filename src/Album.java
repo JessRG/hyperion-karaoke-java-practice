@@ -5,6 +5,7 @@ public class Album {
     private String name;
     private List<Song> songs;
 
+    // Getter(s) and Setter(s)
     public String getName() {
         return name;
     }
@@ -21,23 +22,22 @@ public class Album {
         this.songs = songs;
     }
 
+    // Default Constructor
     public Album() {
         this("defaultAlbum", new ArrayList<>());
     }
 
     // Constructor
     public Album(String name, List<Song> songs) {
-        setName(name);
-        setSongs(songs);
+        this.name = name;
+        this.songs = songs;
     }
 
     public void printTrackListings() {
         List<Song> tracks = getSongs();
-        System.out.println("90S HITS track listing...");
+        System.out.println(String.format("%s track listing...", name));
         for (int i = 0; i < tracks.size(); i++) {
-            System.out.println(
-                    String.format("%d. %s by %s", i + 1, tracks.get(i).getTitle(), tracks.get(i).getArtist())
-            );
+            System.out.printf("%d. %s by %s\n", i + 1, tracks.get(i).getTitle(), tracks.get(i).getArtist());
         }
     }
 }

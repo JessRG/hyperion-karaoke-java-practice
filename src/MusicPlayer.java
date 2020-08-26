@@ -1,10 +1,13 @@
 import java.io.IOException;
 import java.util.List;
 
+import static java.lang.Thread.sleep;
+
 public class MusicPlayer extends Player {
 
     private String voice;
 
+    // Getter(s) and Setter(s)
     public String getVoice() {
         return voice;
     }
@@ -32,10 +35,15 @@ public class MusicPlayer extends Player {
             r.exec(
                     String.format("Say now playing %s by %s -v %s",
                             s.getTitle(), s.getArtist(), voice));
-            Thread.sleep(INTRO_PAUSE);
+            sleep(INTRO_PAUSE);
             for(String lyric : lyrics) {
-                r.exec(String.format("Say %s -v %s", lyric, voice));
-                Thread.sleep(WORD_CADENCE);
+
+                if (voice.isEmpty()) {
+                    r.exec(String.format("Say %s", lyric));
+                } else {
+                    r.exec(String.format("Say -v %s %s", voice, lyric));
+                }
+                sleep(WORD_CADENCE);
             }
         } catch(IOException | InterruptedException e) {
             e.printStackTrace();

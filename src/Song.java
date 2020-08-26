@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Song {
@@ -6,6 +7,7 @@ public class Song {
     private String artist;
     private List<String> lyrics;
 
+    // Getter(s) and Setter(s)
     public String getTitle() {
         return title;
     }
@@ -33,24 +35,21 @@ public class Song {
 
     // Default Constructor
     public Song() {
-        setTitle("Default");
-        setArtist("Default");
-        lyrics = new ArrayList<>();
+        this("default", "default", new ArrayList<>());
     }
 
     // Constructor
     public Song(String title, String artist, List<String> list) {
-        setTitle(title);
-        setArtist(artist);
+        this.title = title;
+        this.artist = artist;
         setLyrics(list);
     }
 
     public static List<String> parseLyrics(String input) {
-        String[] list = input.split(" ");
+        String[] lyricList = input.split(" ");
+
         List<String> parsedLyrics = new ArrayList<>();
-        for (String lyric : list) {
-            parsedLyrics.add(lyric);
-        }
+        parsedLyrics.addAll(Arrays.asList(lyricList));
         return parsedLyrics;
     }
 }
